@@ -19,11 +19,12 @@ import java.util.Optional;
 public class ClienteService {
 
  ClienteRepository clienteRepository;
-
+ @Autowired
+ FormatarCPF formatarCPF;
 
     public Cliente salvarCliente(Cliente cliente) throws Exception{
 
-        FormatarCPF formatarCPF = new FormatarCPF();
+
         String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
         if(clienteRepository.findBydocumento(cpfFormatado).isEmpty()){
          cliente.setDocumento(cpfFormatado);
@@ -36,11 +37,21 @@ public class ClienteService {
 
     public Cliente editarCliente (Cliente cliente, Long id) throws Exception{
         Optional<Cliente>verificarID = clienteRepository.findById(id);
-
-        if (clienteRepository.findBydocumento(cliente.getDocumento()).isPresent()&& verificarID.isPresent()){
-         return  clienteRepository.save(cliente);
+        String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
+        if (verificarID.isPresent()){
+            cliente.setDocumento(cpfFormatado);
+            return  clienteRepository.save(cliente);
         }else {
             throw new RuntimeException("Cliente não cadastrado ou não existe");
+        }
+    }
+
+    public Optional<Cliente> buscarCliente(Long id)throws Exception{
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        if(cliente.isPresent()){
+            return  cliente;
+        }else {
+            throw new Exception("Cliente informado não existe");
         }
     }
 }

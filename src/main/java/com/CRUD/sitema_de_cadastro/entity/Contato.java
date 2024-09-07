@@ -11,8 +11,7 @@ public class Contato {
     private Long id;
     private String dd;
     private String numeroTelefone;
-   @ManyToOne(fetch = FetchType.LAZY)
-    private Cliente cliente;
+    //private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -38,11 +37,4 @@ public class Contato {
         this.numeroTelefone = numeroTelefone;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

@@ -13,8 +13,7 @@ public class Endereco {
   private String bairro;
   private String uf;
   private String estado;
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Cliente cliente;
+  //private Cliente cliente;
 
   public Long getId() {
     return id;
@@ -56,11 +55,4 @@ public class Endereco {
     this.estado = estado;
   }
 
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
-  }
 }
