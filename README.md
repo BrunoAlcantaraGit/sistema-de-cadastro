@@ -1,25 +1,31 @@
-+---------------------+      1       +------------------+
-|      Cliente         |<-------------|     Endereco     |
-+---------------------+               +------------------+
-| - id: Long           |               | - id: Long       |
-| - nome: String       |               | - rua: String    |
-| - email: String      |               | - cidade: String |
-| - telefone: String   |               | - estado: String |
-+---------------------+               +------------------+
-        | 1
-        |        +-------------------+
-        +-------<|     Contato        |
-                 +-------------------+
-                 | - id: Long         |
-                 | - tipo: String     |
-                 | - valor: String    |
-                 +-------------------+
+```mermaid
+classDiagram
+    class Cliente {
+        Long id
+        String nome
+        String email
+        String telefone
+    }
 
-+---------------------+
-|      Veículo         |
-+---------------------+
-| - id: Long           |
-| - marca: String      |
-| - modelo: String     |
-| - placa: String      |
-+---------------------+
+    class Endereco {
+        Long id
+        String rua
+        String cidade
+        String estado
+    }
+
+    class Contato {
+        Long id
+        String tipo
+        String valor
+    }
+
+    class Veiculo {
+        Long id
+        String marca
+        String modelo
+        String placa
+    }
+
+    Cliente "1" --> "0..*" Endereco : possui
+    Cliente "1" --> "0..*" Contato : possui
