@@ -3,17 +3,21 @@ package com.CRUD.sitema_de_cadastro.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+
 @Entity
+@Data
 public class Endereco {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String logradouro;
+  private String cep;
   private String bairro;
   private String uf;
   private String estado;
+  private  String ibge;
   //private Cliente cliente;
+
 
   public Long getId() {
     return id;
@@ -23,20 +27,20 @@ public class Endereco {
     this.id = id;
   }
 
-  public String getLogradouro() {
-    return logradouro;
+  public String getCep() {
+    return cep;
   }
 
-  public void setLogradouro(String logradouro) {
-    this.logradouro = logradouro;
+  public void setCep(String cep) {
+    this.cep = cep;
   }
 
-  public String getBairro() {
-    return bairro;
+  public String getIbge() {
+    return ibge;
   }
 
-  public void setBairro(String bairro) {
-    this.bairro = bairro;
+  public void setIbge(String ibge) {
+    this.ibge = ibge;
   }
 
   public String getUf() {
@@ -47,6 +51,22 @@ public class Endereco {
     this.uf = uf;
   }
 
+  public String getBairro() {
+    return bairro;
+  }
+
+  public void setBairro(String bairro) {
+    this.bairro = bairro;
+  }
+
+  public String getLogradouro() {
+    return logradouro;
+  }
+
+  public void setLogradouro(String logradouro) {
+    this.logradouro = logradouro;
+  }
+
   public String getEstado() {
     return estado;
   }
@@ -54,5 +74,4 @@ public class Endereco {
   public void setEstado(String estado) {
     this.estado = estado;
   }
-
 }

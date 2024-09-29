@@ -17,9 +17,9 @@ public class EnderecoFeingController {
 
 
 
-    @GetMapping("/buscar-endereco/{cep}")
-      public ResponseEntity<Endereco> buscarPeloCep(@PathVariable String cep) {
+    @GetMapping("/buscar-cep/{cep}")
+      public ResponseEntity<Endereco> buscarPeloCep(@PathVariable String cep){
+       return new ResponseEntity<>(enderecoFeingService.buscarEnderecoApi(cep),HttpStatus.OK);
 
-        return new ResponseEntity<>(enderecoFeingService.buscarEnderecoApi(cep),HttpStatus.OK);
     }
 }
