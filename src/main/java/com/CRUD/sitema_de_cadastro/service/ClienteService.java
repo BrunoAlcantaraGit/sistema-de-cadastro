@@ -23,8 +23,6 @@ public class ClienteService {
  FormatarCPF formatarCPF;
 
     public Cliente salvarCliente(Cliente cliente) throws Exception{
-
-
         String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
         if(clienteRepository.findBydocumento(cpfFormatado).isEmpty()){
          cliente.setDocumento(cpfFormatado);
