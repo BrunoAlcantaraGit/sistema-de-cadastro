@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface VeiculoRepository  extends JpaRepository<Veiculo, Long> {
+public interface VeiculoRepository  extends JpaRepository<Veiculo,Long> {
 
-    Optional<Veiculo> findByplaca(String placa);
+   Optional<Veiculo> findByplaca(String placa);
 
 }

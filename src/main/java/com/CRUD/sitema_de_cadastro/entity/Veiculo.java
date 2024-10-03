@@ -13,20 +13,12 @@ public class Veiculo {
     private  String renavan;
     private String tipoRodado;
 
-    public Long getId() {
-        return id;
+    public String getTipoRodado() {
+        return tipoRodado;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setTipoRodado(String tipoRodado) {
+        this.tipoRodado = tipoRodado;
     }
 
     public String getRenavan() {
@@ -37,11 +29,19 @@ public class Veiculo {
         this.renavan = renavan;
     }
 
-    public String getTipoRodado() {
-        return tipoRodado;
+    public String getPlaca() {
+        return placa;
     }
 
-    public void setTipoRodado(String tipoRodado) {
-        this.tipoRodado = tipoRodado;
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

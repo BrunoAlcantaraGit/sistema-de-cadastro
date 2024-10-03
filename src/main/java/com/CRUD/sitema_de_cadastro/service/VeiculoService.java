@@ -12,22 +12,26 @@ import java.util.Optional;
 @AllArgsConstructor
 @Data
 public class VeiculoService {
-    private VeiculoRepository veiculoRepository;
 
-    public Veiculo salvarVeiculo(Veiculo veiculo) throws Exception{
-        Optional<Veiculo> verificarPlaca = veiculoRepository.findByplaca(veiculo.getPlaca());
+    VeiculoRepository veiculoRepository;
 
-        if (verificarPlaca.isEmpty()){
-          return veiculoRepository.save(veiculo);
-        }else {
-        throw new RuntimeException("Veículo já cadastrado");
+    public Veiculo salvarVeiculo(Veiculo veiculo) throws Exception {
+Optional<Veiculo> validarVeículo = veiculoRepository.findByplaca(veiculo.getPlaca());
+           if (validarVeículo.isEmpty()){
+               return veiculoRepository.save(veiculo);
+           }else {
+               throw new RuntimeException("Placa já cadastrada");
+           }
+
         }
-    }
 
-    public Veiculo editarCliente (Veiculo veiculo, Long id) throws Exception{
 
-       if (veiculo.getPlaca().equals(veiculo)){
-         return   veiculoRepository.save(veiculo);
+    public Veiculo editarVeiculo (Veiculo veiculo, Long id) throws Exception{
+
+        Optional<Veiculo> validarPlaca = veiculoRepository.findByplaca(veiculo.getPlaca());
+
+       if (validarPlaca.equals(veiculo.getPlaca())){
+         return veiculoRepository.save(veiculo);
        }else {
            throw new Exception("Placa não cadastrada");
        }
@@ -46,4 +50,5 @@ public class VeiculoService {
     public void deletarVeiculo(Veiculo veiculo){
         veiculoRepository.delete(veiculo);
     }
-}
+    }
+
