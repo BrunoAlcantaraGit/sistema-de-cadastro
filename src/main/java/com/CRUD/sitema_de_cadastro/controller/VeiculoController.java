@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @Data
 @RequestMapping("/veiculo")
@@ -35,4 +37,20 @@ public class VeiculoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/pesquisar-placa/{placa}")
+    public Object pesquisarVeiculoPorPlaca(String placa) throws Exception {
+        Optional <Veiculo> verificarVeiculo =  veiculoService.pesquisarVeiculoPorPlaca(placa);
+        if (verificarVeiculo.isPresent()){
+              return verificarVeiculo;
+        }else {
+             throw new Exception("Placa não cadastrada");
+        }
+
+    }
+   /* @DeleteMapping
+    public void deletarVeiculo (@PathVariable String placa){
+        veiculoService.deletarVeiculo(placa);
+    }*/
+
 }

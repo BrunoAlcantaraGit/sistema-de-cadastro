@@ -4,6 +4,7 @@ import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.repository.VeiculoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,7 +26,6 @@ Optional<Veiculo> validarVeículo = veiculoRepository.findByplaca(veiculo.getPla
 
         }
 
-
     public Veiculo editarVeiculo (Veiculo veiculo, Long id) throws Exception{
 
         Optional<Veiculo> validarPlaca = veiculoRepository.findByplaca(veiculo.getPlaca());
@@ -38,17 +38,16 @@ Optional<Veiculo> validarVeículo = veiculoRepository.findByplaca(veiculo.getPla
 
     }
     public Optional<Veiculo> pesquisarVeiculoPorPlaca(String placa) throws Exception{
-        Veiculo veiculo = new Veiculo();
-        String validarPlaca = veiculo.getPlaca();
-        if (validarPlaca.equals(placa)){
+        Optional<Veiculo>validarPlaca = veiculoRepository.findByplaca(placa);
+        if (validarPlaca.isPresent()){
             return veiculoRepository.findByplaca(placa);
         }else {
             throw new RuntimeException("Placa não existe");
         }
 
     }
-    public void deletarVeiculo(Veiculo veiculo){
-        veiculoRepository.delete(veiculo);
-    }
+   /* public void deletarVeiculo(String placa){
+        veiculoRepository.findByplaca(placa);
+    }*/
     }
 

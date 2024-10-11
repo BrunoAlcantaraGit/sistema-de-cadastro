@@ -11,16 +11,25 @@ public class Endereco {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String logradouro;
+  private String numero;
   private String cep;
   private String bairro;
   private String uf;
-  private String estado;
+  private String cidade;
   private  String ibge;
   //private Cliente cliente;
 
 
   public Long getId() {
     return id;
+  }
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
   }
 
   public void setId(Long id) {
@@ -68,10 +77,10 @@ public class Endereco {
   }
 
   public String getEstado() {
-    return estado;
+    return cidade;
   }
 
   public void setEstado(String estado) {
-    this.estado = estado;
+    this.cidade = estado;
   }
 }

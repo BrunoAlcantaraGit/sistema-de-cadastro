@@ -2,6 +2,7 @@ package com.CRUD.sitema_de_cadastro.service;
 
 import com.CRUD.sitema_de_cadastro.component.FormatarCPF;
 import com.CRUD.sitema_de_cadastro.entity.Cliente;
+import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -52,4 +53,5 @@ public class ClienteService {
             throw new Exception("Cliente informado não existe");
         }
     }
+
 }

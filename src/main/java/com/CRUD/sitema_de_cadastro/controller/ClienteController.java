@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @Data
 @RequestMapping("/cliente")
-public class ClienteController {
+public class ClienteController implements WebMvcConfigurer {
+
+
     @Autowired
     ClienteService clienteService;
     @PostMapping("/salvar")
