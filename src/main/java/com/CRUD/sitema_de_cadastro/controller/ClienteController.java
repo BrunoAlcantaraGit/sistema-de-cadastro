@@ -4,6 +4,8 @@ import com.CRUD.sitema_de_cadastro.entity.Cliente;
 import com.CRUD.sitema_de_cadastro.service.ClienteService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +19,14 @@ import java.util.Optional;
 @Data
 @RequestMapping("/cliente")
 public class ClienteController implements WebMvcConfigurer {
+    private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
 
     @Autowired
     ClienteService clienteService;
     @PostMapping("/salvar")
     public ResponseEntity<Cliente> salvarCliente(@RequestBody Cliente cliente) throws Exception{
+        logger.info("Dados recebidos do cliente: {}", cliente);
         try {
            return new ResponseEntity<Cliente>(clienteService.salvarCliente(cliente),HttpStatus.CREATED);
         }catch (Exception e){

@@ -15,7 +15,7 @@ public class Endereco {
   private String cep;
   private String bairro;
   private String uf;
-  private String cidade;
+  private String localidade;
   private  String ibge;
   //private Cliente cliente;
 
@@ -76,11 +76,11 @@ public class Endereco {
     this.logradouro = logradouro;
   }
 
-  public String getEstado() {
-    return cidade;
+  public String getLocalidae() {
+    return localidade;
   }
 
-  public void setEstado(String estado) {
-    this.cidade = estado;
+  public void setLocalidae(String localidae) {
+    this.localidade = localidae;
   }
 }

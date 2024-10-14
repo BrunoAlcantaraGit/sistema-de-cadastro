@@ -13,10 +13,10 @@ public class Cliente {
     private Long id;
     private String nome;
     private String documento;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Endereco> enderecos;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Contato> contatos;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+    @OneToOne( cascade = CascadeType.ALL)
+    private Contato contato;
 
     public Long getId() {
         return id;
@@ -42,19 +42,19 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public Endereco getEnderecos() {
+        return endereco;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setEnderecos(Endereco enderecos) {
+        this.endereco = enderecos;
     }
 
-    public List<Contato> getContatos() {
-        return contatos;
+    public Contato getContatos() {
+        return contato;
     }
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
+    public void setContatos(Contato contatos) {
+        this.contato = contatos;
     }
 }
