@@ -2,14 +2,14 @@ package com.CRUD.sitema_de_cadastro.service;
 
 import com.CRUD.sitema_de_cadastro.component.FormatarCPF;
 import com.CRUD.sitema_de_cadastro.entity.Cliente;
-import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -52,6 +52,23 @@ public class ClienteService {
         }else {
             throw new Exception("Cliente informado não existe");
         }
+    }
+
+    public List<Cliente>listarCliente() throws Exception{
+        List<Cliente> listClientesretorno = clienteRepository.findAll();
+        List<Cliente>clienteList = new ArrayList<>();
+        if(!listClientesretorno.isEmpty()){
+           for(Cliente clientes:listClientesretorno){
+               clienteList.add(clientes);
+           }
+            return clienteList;
+        }else {
+            throw new Exception("não existe clientes Cadastrados");
+        }
+    }
+
+    public void deletarId(Long id){
+        clienteRepository.deleteById(id);
     }
 
 }
