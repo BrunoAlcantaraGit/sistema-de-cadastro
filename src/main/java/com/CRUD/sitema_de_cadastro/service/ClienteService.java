@@ -35,9 +35,9 @@ public class ClienteService {
     }
 
     public Cliente editarCliente (Cliente cliente, Long id) throws Exception{
-        Optional<Cliente>verificarID = clienteRepository.findById(id);
+        Optional<Cliente>VerificarCPF = clienteRepository.findById(id);
         String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
-        if (verificarID.isPresent()){
+        if (VerificarCPF.isPresent()){
             cliente.setDocumento(cpfFormatado);
             return  clienteRepository.save(cliente);
         }else {
@@ -67,8 +67,14 @@ public class ClienteService {
         }
     }
 
-    public void deletarId(Long id){
-        clienteRepository.deleteById(id);
+    public void deletarId(Long id) throws Exception{
+        Optional<Cliente> validarCliente = clienteRepository.findById(id);
+        if(validarCliente.isPresent()){
+         clienteRepository.deleteById(id);
+      }else{
+            throw new RuntimeException("Cliente não existe");
+        }
+
     }
 
 }

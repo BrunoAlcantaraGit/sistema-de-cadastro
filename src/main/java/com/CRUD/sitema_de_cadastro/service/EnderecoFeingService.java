@@ -19,9 +19,9 @@ public class EnderecoFeingService {
 
     EnderecoFeing enderecoFeing;
 
-    public Endereco buscarEnderecoApi(String cep)  {
+    public Endereco buscarEnderecoApi(String macrorregiao)  {
 
-        return enderecoFeing.enderecoApi(cep);
+        return enderecoFeing.enderecoApi(macrorregiao);
 
     }
 }

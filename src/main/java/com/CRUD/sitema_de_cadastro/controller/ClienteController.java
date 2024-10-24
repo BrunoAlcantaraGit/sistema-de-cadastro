@@ -39,7 +39,7 @@ public class ClienteController implements WebMvcConfigurer {
 
     }
 
-    @PutMapping("/editar/{id}")
+    @PutMapping("/editar/{doc}")
     public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente, @PathVariable Long id) throws Exception {
         try {
             return new ResponseEntity<>(clienteService.editarCliente(cliente, id), HttpStatus.OK);
@@ -52,7 +52,7 @@ public class ClienteController implements WebMvcConfigurer {
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Optional<Cliente>> buscarCliente(@PathVariable Long id) throws Exception {
         try {
-            return new ResponseEntity<>(clienteService.buscarCliente(id), HttpStatus.FOUND);
+            return new ResponseEntity<>(clienteService.buscarCliente(id), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -68,4 +68,13 @@ public class ClienteController implements WebMvcConfigurer {
         }
     }
 
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity DeletarCliente(@PathVariable Long id)throws Exception{
+        try {
+            clienteService.deletarId(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
