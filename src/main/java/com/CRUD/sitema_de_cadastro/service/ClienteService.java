@@ -24,9 +24,7 @@ public class ClienteService {
  FormatarCPF formatarCPF;
 
     public Cliente salvarCliente(Cliente cliente) throws Exception{
-        String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
-        if(clienteRepository.findBydocumento(cpfFormatado).isEmpty()){
-         cliente.setDocumento(cpfFormatado);
+        if(cliente.getDocumento().isEmpty()){
           return  clienteRepository.save(cliente);
         }else {
             throw new RuntimeException("CPF Já cadastrado");

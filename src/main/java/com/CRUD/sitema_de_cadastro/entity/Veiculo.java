@@ -1,9 +1,8 @@
 package com.CRUD.sitema_de_cadastro.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
+
 @Entity
 public class Veiculo {
     @Id

@@ -5,7 +5,6 @@ import lombok.Data;
 
 
 @Entity
-@Data
 public class Endereco {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,48 +23,8 @@ public class Endereco {
     return id;
   }
 
-  public String getNumero() {
-    return numero;
-  }
-
-  public void setNumero(String numero) {
-    this.numero = numero;
-  }
-
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public String getCep() {
-    return cep;
-  }
-
-  public void setCep(String cep) {
-    this.cep = cep;
-  }
-
-  public String getIbge() {
-    return ibge;
-  }
-
-  public void setIbge(String ibge) {
-    this.ibge = ibge;
-  }
-
-  public String getUf() {
-    return uf;
-  }
-
-  public void setUf(String uf) {
-    this.uf = uf;
-  }
-
-  public String getBairro() {
-    return bairro;
-  }
-
-  public void setBairro(String bairro) {
-    this.bairro = bairro;
   }
 
   public String getLogradouro() {
@@ -76,11 +35,51 @@ public class Endereco {
     this.logradouro = logradouro;
   }
 
-  public String getLocalidae() {
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
+
+  public String getCep() {
+    return cep;
+  }
+
+  public void setCep(String cep) {
+    this.cep = cep;
+  }
+
+  public String getBairro() {
+    return bairro;
+  }
+
+  public void setBairro(String bairro) {
+    this.bairro = bairro;
+  }
+
+  public String getUf() {
+    return uf;
+  }
+
+  public void setUf(String uf) {
+    this.uf = uf;
+  }
+
+  public String getLocalidade() {
     return localidade;
   }
 
-  public void setLocalidae(String localidae) {
-    this.localidade = localidae;
+  public void setLocalidade(String localidade) {
+    this.localidade = localidade;
+  }
+
+  public String getIbge() {
+    return ibge;
+  }
+
+  public void setIbge(String ibge) {
+    this.ibge = ibge;
   }
 }

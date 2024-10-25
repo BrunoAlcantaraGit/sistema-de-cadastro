@@ -2,11 +2,12 @@ package com.CRUD.sitema_de_cadastro.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,19 +43,19 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public Endereco getEnderecos() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEnderecos(Endereco enderecos) {
-        this.endereco = enderecos;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public Contato getContatos() {
+    public Contato getContato() {
         return contato;
     }
 
-    public void setContatos(Contato contatos) {
-        this.contato = contatos;
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
 }

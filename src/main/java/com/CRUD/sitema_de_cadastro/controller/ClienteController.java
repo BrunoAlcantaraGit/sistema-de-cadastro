@@ -39,8 +39,9 @@ public class ClienteController implements WebMvcConfigurer {
 
     }
 
-    @PutMapping("/editar/{doc}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente, @PathVariable Long id) throws Exception {
+        logger.info("Dados recebidos do cliente: {}", cliente);
         try {
             return new ResponseEntity<>(clienteService.editarCliente(cliente, id), HttpStatus.OK);
         } catch (Exception e) {
