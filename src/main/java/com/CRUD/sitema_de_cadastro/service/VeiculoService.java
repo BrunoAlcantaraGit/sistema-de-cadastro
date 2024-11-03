@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -61,5 +63,28 @@ public class VeiculoService {
             throw new Exception("Veículo inexitente");
         }
     }
+
+    public List<Veiculo> listarTodosVeiculos () throws Exception{
+        List<Veiculo> veiculos = veiculoRepository.findAll();
+        List<Veiculo> listarVeiculos = new ArrayList<>();
+        if (!veiculos.isEmpty()) {
+            for (Veiculo l : veiculos) {
+                listarVeiculos.add(l);
+            }
+            return listarVeiculos;
+        }else {
+            throw new Exception("Não existe veículos a serem listados");
+        }
+    }
+
+    public Optional<Veiculo>busacarVeiculoID(Long id) throws  Exception{
+        Optional<Veiculo>VeiricarIdVeiculo = veiculoRepository.findById(id);
+        if (VeiricarIdVeiculo.isPresent()){
+            return veiculoRepository.findById(id);
+        }else {
+            throw new Exception("Veiculo não existe");
+        }
+    }
+
 }
 

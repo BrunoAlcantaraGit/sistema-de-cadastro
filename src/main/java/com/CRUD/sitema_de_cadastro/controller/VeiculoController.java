@@ -5,10 +5,12 @@ import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.service.VeiculoService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 @CrossOrigin
 @RestController
@@ -43,9 +45,9 @@ public class VeiculoController {
     public Object pesquisarVeiculoPorPlaca(String placa) throws Exception {
         Optional <Veiculo> verificarVeiculo =  veiculoService.pesquisarVeiculoPorPlaca(placa);
         if (verificarVeiculo.isPresent()){
-              return verificarVeiculo;
+              return new ResponseEntity<>( veiculoService.pesquisarVeiculoPorPlaca(placa),HttpStatus.OK);
         }else {
-             throw new Exception("Placa não cadastrada");
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
@@ -60,5 +62,25 @@ public class VeiculoController {
        }
   }
 
+  @GetMapping("listar-veiculos")
+    public ResponseEntity<List<Cliente>>listarTodosVeiculos()throws Exception{
+        try {
+            veiculoService.listarTodosVeiculos();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+  }
+
+  @GetMapping("listar-por-id/{id}")
+    public ResponseEntity<Optional<Veiculo>>busacarVeiculoID(@PathVariable Long id) throws Exception{
+        try {
+           return new ResponseEntity<>(veiculoService.busacarVeiculoID(id), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+  }
 
 }
