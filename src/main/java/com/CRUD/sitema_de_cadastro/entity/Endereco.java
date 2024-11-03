@@ -1,10 +1,12 @@
 package com.CRUD.sitema_de_cadastro.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

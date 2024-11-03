@@ -1,5 +1,6 @@
 package com.CRUD.sitema_de_cadastro.controller;
 
+import com.CRUD.sitema_de_cadastro.entity.Cliente;
 import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.service.VeiculoService;
 import lombok.Data;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @Data
 @RequestMapping("/veiculo")
@@ -48,9 +49,16 @@ public class VeiculoController {
         }
 
     }
-   /* @DeleteMapping
-    public void deletarVeiculo (@PathVariable String placa){
-        veiculoService.deletarVeiculo(placa);
-    }*/
+  @DeleteMapping("deletar/{id}")
+    public ResponseEntity deletarVeiculoPorId(@PathVariable Long id) throws Exception {
+       try {
+           veiculoService.deletarVeiculoPorId(id);
+           return new  ResponseEntity<>(HttpStatus.OK);
+       }catch (Exception e){
+           e.printStackTrace();
+        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+  }
+
 
 }
