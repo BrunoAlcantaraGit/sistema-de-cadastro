@@ -4,6 +4,8 @@ import com.CRUD.sitema_de_cadastro.entity.Cliente;
 import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.service.VeiculoService;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,13 @@ import java.util.Optional;
 public class VeiculoController {
     @Autowired
     VeiculoService veiculoService;
+    private static final Logger logger = LoggerFactory.getLogger(VeiculoController.class);
+
 
     @PostMapping("/salvar")
     public ResponseEntity<Veiculo>salvarVeiculo(@RequestBody Veiculo veiculo) throws Exception {
+        logger.info("Dados recebidos do cliente: {}", veiculo);
+
         try {
           return new  ResponseEntity<Veiculo>(veiculoService.salvarVeiculo(veiculo), HttpStatus.CREATED) ;
 
@@ -51,10 +57,10 @@ public class VeiculoController {
         }
 
     }
-  @DeleteMapping("deletar/{id}")
-    public ResponseEntity deletarVeiculoPorId(@PathVariable Long id) throws Exception {
+  @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletarPorId(@PathVariable Long id) throws Exception {
        try {
-           veiculoService.deletarVeiculoPorId(id);
+           veiculoService.deletarPorId(id);
            return new  ResponseEntity<>(HttpStatus.OK);
        }catch (Exception e){
            e.printStackTrace();
@@ -62,18 +68,17 @@ public class VeiculoController {
        }
   }
 
-  @GetMapping("listar-veiculos")
-    public ResponseEntity<List<Cliente>>listarTodosVeiculos()throws Exception{
+  @GetMapping("/listar")
+    public ResponseEntity<List<Veiculo>>listarVeiculos()throws Exception{
         try {
-            veiculoService.listarTodosVeiculos();
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(veiculoService.listarVeiculos(),HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+
            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
   }
 
-  @GetMapping("listar-por-id/{id}")
+  @GetMapping("/listar-por-id/{id}")
     public ResponseEntity<Optional<Veiculo>>busacarVeiculoID(@PathVariable Long id) throws Exception{
         try {
            return new ResponseEntity<>(veiculoService.busacarVeiculoID(id), HttpStatus.OK);

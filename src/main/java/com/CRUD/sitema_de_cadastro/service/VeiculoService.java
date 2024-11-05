@@ -3,6 +3,7 @@ package com.CRUD.sitema_de_cadastro.service;
 import com.CRUD.sitema_de_cadastro.controller.ClienteController;
 import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.repository.VeiculoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class VeiculoService {
 
         Optional<Veiculo> validarPlaca = veiculoRepository.findByplaca(veiculo.getPlaca());
 
-        if (validarPlaca.equals(veiculo.getPlaca())) {
+        if (validarPlaca.isPresent()) {
             return veiculoRepository.save(veiculo);
         } else {
             throw new Exception("Placa não cadastrada");
@@ -55,7 +56,9 @@ public class VeiculoService {
         }
 
     }
-    public void deletarVeiculoPorId (Long id) throws Exception{
+
+    @Transactional
+    public void deletarPorId(Long id) throws Exception{
         Optional<Veiculo> validarPlaca = veiculoRepository.findById(id);
         if(validarPlaca.isPresent()){
             veiculoRepository.deleteByid(id);
@@ -64,7 +67,7 @@ public class VeiculoService {
         }
     }
 
-    public List<Veiculo> listarTodosVeiculos () throws Exception{
+    public List<Veiculo> listarVeiculos () throws Exception{
         List<Veiculo> veiculos = veiculoRepository.findAll();
         List<Veiculo> listarVeiculos = new ArrayList<>();
         if (!veiculos.isEmpty()) {

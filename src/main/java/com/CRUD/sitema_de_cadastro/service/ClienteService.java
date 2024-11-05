@@ -28,8 +28,6 @@ public class ClienteService {
     public Cliente salvarCliente(Cliente cliente) throws Exception {
         logger.info("Dados recebidos do cliente: {}", cliente);
         Optional<Cliente> verificarDocumento = clienteRepository.findBydocumento(cliente.getDocumento());
-
-
         if (verificarDocumento.isEmpty() || verificarDocumento == null) {
             String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
             cliente.setDocumento(cpfFormatado);
