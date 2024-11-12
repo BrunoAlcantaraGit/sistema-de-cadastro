@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,13 +33,17 @@ public class VeiculoService {
         }
 
     }
-
-    public Veiculo editarVeiculo(Veiculo veiculo, Long id) throws Exception {
+@Transactional
+    public Veiculo editarVeiculo (Long id, Veiculo veiculo) throws Exception {
 
         Optional<Veiculo> validarPlaca = veiculoRepository.findByplaca(veiculo.getPlaca());
 
         if (validarPlaca.isPresent()) {
-            return veiculoRepository.save(veiculo);
+          Veiculo veiculoatualizado = validarPlaca.get();
+           veiculoatualizado.setPlaca(veiculo.getPlaca());
+           veiculoatualizado.setRenavan(veiculo.getRenavan());
+           veiculoatualizado.setTipoRodado(veiculo.getTipoRodado());
+           return veiculo;
         } else {
             throw new Exception("Placa não cadastrada");
         }

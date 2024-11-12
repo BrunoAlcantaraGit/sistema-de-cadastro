@@ -1,13 +1,13 @@
 package com.CRUD.sitema_de_cadastro.controller;
 
-import com.CRUD.sitema_de_cadastro.entity.Cliente;
 import com.CRUD.sitema_de_cadastro.entity.Veiculo;
 import com.CRUD.sitema_de_cadastro.service.VeiculoService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +38,10 @@ public class VeiculoController {
     }
 
     @PutMapping("/atualizar-veiculo/{id}")
-    public ResponseEntity<Veiculo> editarCliente (@RequestBody Veiculo veiculo, @PathVariable Long id) throws  Exception{
+    @Transactional
+    public ResponseEntity<Veiculo> editarCliente (@RequestBody @Valid Veiculo veiculo, @PathVariable Long id) throws  Exception{
         try {
-            return  new ResponseEntity<Veiculo>(veiculoService.editarVeiculo(veiculo,id),HttpStatus.OK);
+            return  new ResponseEntity<Veiculo>(veiculoService.editarVeiculo(id,veiculo),HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

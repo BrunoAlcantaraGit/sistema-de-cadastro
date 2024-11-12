@@ -4,6 +4,7 @@ import com.CRUD.sitema_de_cadastro.component.FormatarCPF;
 import com.CRUD.sitema_de_cadastro.controller.ClienteController;
 import com.CRUD.sitema_de_cadastro.entity.Cliente;
 import com.CRUD.sitema_de_cadastro.repository.ClienteRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -37,13 +38,19 @@ public class ClienteService {
         }
 
     }
-
+    @Transactional
     public Cliente editarCliente(Cliente cliente, Long id) throws Exception {
-        Optional<Cliente> VerificarCPF = clienteRepository.findById(id);
+        Optional<Cliente> verificarCliente = clienteRepository.findBydocumento(cliente.getDocumento());
+
         String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
-        if (VerificarCPF.isPresent()) {
-            cliente.setDocumento(cpfFormatado);
-            return clienteRepository.save(cliente);
+
+        if (verificarCliente.isPresent()) {
+            Cliente clienteAtualizado = verificarCliente.get();
+            clienteAtualizado.setNome(cliente.getNome());
+            clienteAtualizado.setDocumento(cliente.getDocumento());
+            clienteAtualizado.setEndereco(cliente.getEndereco());
+            clienteAtualizado.setContato(cliente.getContato());
+            return cliente;
         } else {
             throw new RuntimeException("Cliente não cadastrado ou não existe");
         }
@@ -70,7 +77,7 @@ public class ClienteService {
             throw new Exception("não existe clientes Cadastrados");
         }
     }
-
+    @Transactional
     public void deletarId(Long id) throws Exception {
         Optional<Cliente> validarCliente = clienteRepository.findById(id);
         if (validarCliente.isPresent()) {
