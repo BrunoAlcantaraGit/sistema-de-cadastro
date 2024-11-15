@@ -42,12 +42,10 @@ public class ClienteService {
     public Cliente editarCliente(Cliente cliente, Long id) throws Exception {
         Optional<Cliente> verificarCliente = clienteRepository.findBydocumento(cliente.getDocumento());
 
-        String cpfFormatado = formatarCPF.formatarCPF(cliente.getDocumento());
-
         if (verificarCliente.isPresent()) {
             Cliente clienteAtualizado = verificarCliente.get();
             clienteAtualizado.setNome(cliente.getNome());
-            clienteAtualizado.setDocumento(cliente.getDocumento());
+            clienteAtualizado.setDocumento(formatarCPF.formatarCPF(cliente.getDocumento()));
             clienteAtualizado.setEndereco(cliente.getEndereco());
             clienteAtualizado.setContato(cliente.getContato());
             return cliente;
